@@ -1,20 +1,24 @@
 import React from "react";
 import { useStyle } from "../hooks/useStyle";
 import { logics } from "../libs/logics";
-import type { BlendMode, Color, ExpressionComponent } from "../type";
+import type {
+  BlendMode,
+  BlendModeExample,
+  Color,
+  ExpressionComponent,
+} from "../type";
 import { ColorCard } from "./ColorCard";
-import { logicViews } from "./expressions";
 import { RGB } from "./RGB";
 
 const ColorExample: React.FC<{
   c1: Color;
   c2: Color;
   blendMode: BlendMode;
-}> = ({ c1, c2, blendMode }) => {
+  logic: BlendModeExample["logic"];
+}> = ({ c1, c2, blendMode, logic }) => {
   const result = React.useMemo(() => {
-    const logic = logics[blendMode];
     return logic({ base: c1, target: c2 });
-  }, [blendMode, c1, c2]);
+  }, [c1, c2, logic]);
   const resultStyle = useStyle(result);
   return (
     <div className="example-show-case">
@@ -43,7 +47,7 @@ const ColorExample: React.FC<{
 const LogicExpression: React.FC<{
   c1: Color;
   c2: Color;
-  expression: ExpressionComponent;
+  expression: BlendModeExample["view"]["expression"];
 }> = ({ c1, c2, expression: Expression }) => {
   const keys = ["r", "g", "b"] as const;
   return (
@@ -62,32 +66,45 @@ const LogicExpression: React.FC<{
 
 export const ShowCase: React.FC<{
   blendMode: BlendMode;
-  colors: [Color, Color];
+  example: BlendModeExample;
 }> = (props) => {
-  const { blendMode, colors } = props;
+  const { blendMode, example } = props;
+  const { example: colors, logic, view } = example;
+  const { expression } = view;
 
-  const [baseColor, color] = colors;
+  const [baseColor, color] = React.useMemo(() => {
+    return colors.map((c) => ({
+      r: c[0],
+      g: c[1],
+      b: c[2],
+    })) as [Color, Color];
+  }, [colors]);
 
   const expressions = React.useMemo(() => {
-    const expression = logicViews[blendMode];
-    if (expression === undefined) {
-      return [];
-    }
-
     if (Array.isArray(expression)) {
       return expression;
     } else {
       return [expression];
     }
-  }, [blendMode]);
+  }, [expression]);
 
   return (
     <div>
       <div>
-        <ColorExample c1={baseColor} c2={color} blendMode={blendMode} />
+        <ColorExample
+          c1={baseColor}
+          c2={color}
+          blendMode={blendMode}
+          logic={logic}
+        />
       </div>
       <div style={{ marginTop: "20px" }}>
-        <ColorExample c2={baseColor} c1={color} blendMode={blendMode} />
+        <ColorExample
+          c2={baseColor}
+          c1={color}
+          blendMode={blendMode}
+          logic={logic}
+        />
       </div>
       <div style={{ marginTop: "20px" }}>
         {expressions.map((Expression, index) => {
