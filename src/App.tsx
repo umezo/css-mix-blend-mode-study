@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { ShowCase } from "./components/ShowCase";
+import { Color, BlendMode } from "./type";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  type SpreadColor = [Color["r"], Color["g"], Color["b"]];
+  const examples: Partial<Record<BlendMode, [SpreadColor, SpreadColor]>> = {
+    multiply: [
+      [1, 0, 1],
+      [1, 0.5, 0],
+    ],
+    screen: [
+      [1, 0, 1],
+      [1, 0.5, 0],
+    ],
+    overlay: [
+      [0.7, 0.3, 0.7],
+      [0, 0.7, 0],
+    ],
+    darken: [
+      [0, 1, 1],
+      [0.8, 0, 0.8],
+    ],
+    lighten: [
+      [0.2, 0.3, 0.9],
+      [0.4, 0.2, 0.4],
+    ],
+    "color-dodge": [
+      [0.8, 0.9, 0.6],
+      [0.8, 0.3, 0.2],
+    ],
+  };
+  const keys = Object.keys(examples) as (keyof typeof examples)[];
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
+      <ul className="example-list">
+        {keys.map((blendMode) => {
+          const colors = examples[blendMode];
 
-export default App
+          if (colors === undefined) {
+            return null;
+          }
+
+          const colorsProp = colors.map((c) => ({
+            r: c[0],
+            g: c[1],
+            b: c[2],
+          })) as [Color, Color];
+
+          return (
+            <li key={blendMode}>
+              <div className="example">
+                <h2>{blendMode}</h2>
+                <ShowCase blendMode={blendMode} colors={colorsProp} />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
