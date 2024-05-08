@@ -1,6 +1,7 @@
 import { BlendMode, ExpressionComponent } from "../type";
 
 const views: Record<Exclude<BlendMode, "overlay">, ExpressionComponent> = {
+  normal: ({ v2 }) => <>{v2}</>,
   multiply: ({ v1, v2 }) => (
     <>
       {v1} x {v2} = {v1 * v2}
@@ -26,6 +27,15 @@ const views: Record<Exclude<BlendMode, "overlay">, ExpressionComponent> = {
       {v1} / (1 - {v2}) = {v1 / (1 - v2)}
     </>
   ),
+  //
+  "color-burn": ({ v1 }) => <>{v1}</>,
+  "hard-light": ({ v1 }) => <>{v1}</>,
+  "soft-light": ({ v1 }) => <>{v1}</>,
+  difference: ({ v1 }) => <>{v1}</>,
+  exclusion: ({ v1 }) => <>{v1}</>,
+  hue: ({ v1 }) => <>{v1}</>,
+  saturation: ({ v1 }) => <>{v1}</>,
+  color: ({ v1 }) => <>{v1}</>,
 } as const;
 
 export const logicViews: Record<
