@@ -1,5 +1,4 @@
 import { BlendMode, Color } from "../type";
-import { rgb2hsl } from "./hsl";
 
 type ColorLogic = (props: { base: Color; target: Color }) => Color;
 
@@ -17,7 +16,14 @@ const each = (
   };
 };
 
+/**
+ * https://developer.mozilla.org/ja/docs/Web/CSS/mix-blend-mode
+ * https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%AC%E3%83%B3%E3%83%89%E3%83%A2%E3%83%BC%E3%83%89
+ */
 export const logics: Logics = {
+  normal: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
   multiply: ({ base, target }) => {
     return each(base, target, (v1, v2) => v1 * v2);
   },
@@ -37,5 +43,33 @@ export const logics: Logics = {
   },
   "color-dodge": ({ base, target }) => {
     return each(base, target, (v1, v2) => v1 / (1 - v2));
+  },
+  //
+  "color-burn": ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  "hard-light": ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  "soft-light": ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  difference: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  exclusion: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  hue: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  saturation: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  color: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
+  },
+  luminosity: ({ base, target }) => {
+    return each(base, target, (v1) => v1);
   },
 };
