@@ -3,7 +3,7 @@ import { eachColor } from "../eachColor";
 
 export const Darken: BlendModeExample = {
   logic: ({ base, target }) => {
-    return eachColor(base, target, (v1, v2) => 1 - (1 - v1) * (1 - v2));
+    return eachColor(base, target, (v1, v2) => Math.min(v1, v2));
   },
   example: [
     [0, 1, 1],
