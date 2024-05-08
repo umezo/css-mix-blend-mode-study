@@ -1,8 +1,8 @@
 //https://github.com/JuhQ/rgb-to-hsl/blob/master/index.js
 export function rgb2hsl(r: number, g: number, b: number) {
-  var d, h, l, max, min, s;
-  max = Math.max(r, g, b);
-  min = Math.min(r, g, b);
+  let d, h, l, s;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
   h = 0;
   s = 0;
   l = (max + min) / 2;
