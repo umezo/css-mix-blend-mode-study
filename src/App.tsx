@@ -5,6 +5,10 @@ import { Color, BlendMode } from "./type";
 export default function App() {
   type SpreadColor = [Color["r"], Color["g"], Color["b"]];
   const examples: Partial<Record<BlendMode, [SpreadColor, SpreadColor]>> = {
+    normal: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
     multiply: [
       [1, 0, 1],
       [1, 0.5, 0],
@@ -28,6 +32,43 @@ export default function App() {
     "color-dodge": [
       [0.8, 0.9, 0.6],
       [0.8, 0.3, 0.2],
+    ],
+
+    "color-burn": [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    "hard-light": [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    "soft-light": [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    difference: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    exclusion: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    hue: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    saturation: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    color: [
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    luminosity: [
+      [1, 1, 0],
+      [1, 0, 1],
     ],
   };
   const keys = Object.keys(examples) as (keyof typeof examples)[];
