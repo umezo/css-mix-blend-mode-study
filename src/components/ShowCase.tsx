@@ -1,12 +1,6 @@
 import React from "react";
 import { useStyle } from "../hooks/useStyle";
-import { logics } from "../libs/logics";
-import type {
-  BlendMode,
-  BlendModeExample,
-  Color,
-  ExpressionComponent,
-} from "../type";
+import type { BlendMode, BlendModeExample, Color } from "../type";
 import { ColorCard } from "./ColorCard";
 import { RGB } from "./RGB";
 
