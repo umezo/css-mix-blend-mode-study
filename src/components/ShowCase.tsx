@@ -13,11 +13,12 @@ const ColorExample: React.FC<{
   const result = React.useMemo(() => {
     return logic({ base: c1, target: c2 });
   }, [c1, c2, logic]);
+  const resultColorType = result.type;
   const resultStyle = useStyle(result);
   return (
     <div className="example-show-case">
-      <ColorCard color={c1} />
-      <ColorCard color={c2} />
+      <ColorCard color={c1} colorSpace={resultColorType} />
+      <ColorCard color={c2} colorSpace={resultColorType} />
       <div className="color-result">
         <ColorCard color={c1}>
           <ColorCard color={c2} style={{ mixBlendMode: blendMode }}>
@@ -26,7 +27,7 @@ const ColorExample: React.FC<{
         </ColorCard>
       </div>
       <div>
-        <RGB color={result} />
+        <RGB color={result} colorSpace={resultColorType} />
         <div
           style={{
             ...resultStyle,
