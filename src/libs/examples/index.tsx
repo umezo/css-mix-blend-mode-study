@@ -2,6 +2,7 @@ import { Color } from "./color";
 import { ColorBurn } from "./color-burn";
 import { ColorDodge } from "./color-dodge";
 import { Darken } from "./darken";
+import { Difference } from "./difference";
 import { HardLight } from "./hard-light";
 import { Hue } from "./hue";
 import { Lighten } from "./lighten";
@@ -11,6 +12,7 @@ import { Normal } from "./normal";
 import { Overlay } from "./overlay";
 import { Saturation } from "./saturation";
 import { Screen } from "./screen";
+import { SoftLight } from "./soft-light";
 
 /**
  * https://developer.mozilla.org/ja/docs/Web/CSS/mix-blend-mode
@@ -64,13 +66,13 @@ export const examples = {
    * ソフトライトの実装方式は、いろいろある。
    * 2012年時点でのGIMPで採用されているソフトライトの実装は、オーバーレイと全く同じ効果が得られるが、これは単なるバグである。
    */
-  "soft-light": HardLight,
+  "soft-light": SoftLight,
 
   /**
    * 絶対値を取っているため、下のレイヤーと上のレイヤーを入れ替えても同じ結果となる。
    * このブレンドモードは「差分アリ」の画像を扱う際に便利である。ほとんど同じだが微妙に違う、と言う2枚のコンテンツを「差の絶対値」でブレンドすることで、どこがどう違うのか確認できる。
    */
-  difference: HardLight,
+  difference: Difference,
 
   /**
    * ?????
