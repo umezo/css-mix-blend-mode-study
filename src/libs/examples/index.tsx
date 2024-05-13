@@ -1,11 +1,15 @@
+import { Color } from "./color";
 import { ColorBurn } from "./color-burn";
 import { ColorDodge } from "./color-dodge";
 import { Darken } from "./darken";
 import { HardLight } from "./hard-light";
+import { Hue } from "./hue";
 import { Lighten } from "./lighten";
+import { Luminosity } from "./luminosity";
 import { Multiply } from "./multiply";
 import { Normal } from "./normal";
 import { Overlay } from "./overlay";
+import { Saturation } from "./saturation";
 import { Screen } from "./screen";
 
 /**
@@ -75,17 +79,17 @@ export const examples = {
   /**
    * 下のレイヤーの輝度と彩度はそのままで、上のレイヤーの色相で上書きされる。
    */
-  hue: HardLight,
+  hue: Hue,
   /**
    * 下のレイヤーの輝度と色相はそのままで、上のレイヤーの彩度で上書きされる。
    */
-  saturation: HardLight,
+  saturation: Saturation,
   /**
    * 下のレイヤーの輝度はそのままで、上のレイヤーの色相と彩度で上書きされる
    */
-  color: HardLight,
+  color: Color,
   /**
    * 下のレイヤーの色相と彩度はそのままで、上のレイヤーの輝度で上書きされる。
    */
-  luminosity: HardLight,
+  luminosity: Luminosity,
 };
